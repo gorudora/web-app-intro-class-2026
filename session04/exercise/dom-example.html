@@ -35,7 +35,13 @@
     </ul>
 
     <script>
-      // ↓↓↓ ここから下に、スライドのコードを書いてください ↓↓↓
+      const addItemBtn = document.getElementById("add-item-btn");
+      const itemList = document.getElementById("item-list");
+      addItemBtn.addEventListener("click", () => {
+        const newItem = document.createElement("li");
+        newItem.textContent = "地獄";
+        itemList.appendChild(newItem);
+      });
     </script>
   </body>
 </html>
