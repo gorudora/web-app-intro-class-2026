@@ -15,38 +15,29 @@ from fastapi import FastAPI
 
 app = FastAPI()
 
-
-# -----------------------------------------------
-# エンドポイント1: ルート（実装済み）
-# -----------------------------------------------
 @app.get("/")
 def root():
     return {"message": "TODO API is running", "docs": "/docs"}
 
+@app.get("/todo/{id}")
+def get_todo(id):
+    index = int(id) - 1
+    return todos[index]
 
-# -----------------------------------------------
-# エンドポイント2: 名前付き挨拶
-# -----------------------------------------------
-# ヒント:
-#   @app.get("/hello/{name}")
-#   def hello(name: str):
-#       return {"message": f"こんにちは、{name}さん！"}
+@app.get("/hello/{name}")
+def hello(name: str):
+    return {"message": f"こんにちは、{name}さん！"}
 
 
-# -----------------------------------------------
-# エンドポイント3: TODOリスト取得
-# -----------------------------------------------
-# ヒント: まずTODOデータを作成
-#   todos = [
-#       {"id": 1, "title": "買い物に行く", "done": False},
-#       {"id": 2, "title": "レポートを書く", "done": True},
-#       {"id": 3, "title": "部屋を掃除する", "done": False},
-#   ]
-#
-# ヒント: エンドポイントを作成
-#   @app.get("/todos")
-#   def get_todos():
-#       return todos
+todos = [
+    {"id": 1, "title": "買い物に行く", "done": False},
+    {"id": 2, "title": "レポートを書く", "done": True},
+    {"id": 3, "title": "部屋を掃除する", "done": False},
+]
+
+@app.get("/todos")
+def get_todos():
+    return todos
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
